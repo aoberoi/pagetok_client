@@ -1,0 +1,27 @@
+<html>
+<head>
+<script>
+  // Map of tab.id's to session id's
+  var sessionMap = {};
+  
+  // Called when the user clicks on the browser action.
+  chrome.browserAction.onClicked.addListener(function(tab) {
+    
+    // TODO: if passed in tab.id does not exist in map, load the scripts into the tab 
+    if (typeof sessionMap[tab.id] == "undefined") {
+      sessionMap[tab.id] = "scripts loaded";
+      chrome.tabs.executeScript(null, { file : "js/libs/jquery.js" });
+      chrome.tabs.executeScript(null, { file : "js/otsession.js" });
+      chrome.tabs.insertCSS(null, { file : "css/otsession.css" });
+    }
+    
+    // pass message for PageTok to toggle
+    chrome.tabs.sendRequest(tab.id, { name: "toggle" });
+  });
+
+  // listener for new tabs, needs some mechanism to find out now many streams are in the session
+  chrome.browserAction.setBadgeBackgroundColor({color:[0, 200, 0, 100]});
+
+</script>
+</head>
+</html>

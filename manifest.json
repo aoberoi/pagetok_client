@@ -1,0 +1,13 @@
+{
+  "name" : "PageTok",
+  "version" : "0.1",
+  "description" : "Create or join a Tokbox video conference based on URL",
+  "background_page": "background.html",
+  "permissions": [
+    "tabs",
+    "http://*/*"
+  ],
+  "browser_action" : {
+    "default_icon" : "icon.png"
+  }
+}

@@ -1,0 +1,17 @@
+#ot_session {
+	position: fixed;
+	display: block;
+	background-color: #FDFDFD;
+	border: 1px solid #BBB;
+	color: #313131;
+	font-family: 'Lucida Grade', Tahoma, Arial, sans-serif;
+	font-size: 12px;
+	line-height: 10px;
+	margin: 0;
+	text-align: left;
+	text-transform: none;
+	top:0%;
+	width:320px;
+	-webkit-box-shadow: #CCC 0px 0px 5px;
+	z-index: 10000;
+}
