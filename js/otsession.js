@@ -15,12 +15,16 @@ var PageTok = {
 			} else {
 				this.session = TB.initSession(this.sessionId);	// Initialize session
 				
-				this.session.addEventListener('sessionConnected', this.sessionConnectedHandler);
-				this.session.addEventListener('sessionDisconnected', this.sessionDisconnectedHandler);
-				this.session.addEventListener('connectionCreated', this.connectionCreatedHandler);
-				this.session.addEventListener('connectionDestroyed', this.connectionDestroyedHandler);
-				this.session.addEventListener('streamCreated', this.streamCreatedHandler);
-				this.session.addEventListener('streamDestroyed', this.streamDestroyedHandler);
+				// this.session.addEventListener('sessionConnected', this.sessionConnectedHandler);
+				// this.session.addEventListener('sessionDisconnected', this.sessionDisconnectedHandler);
+				// this.session.addEventListener('connectionCreated', this.connectionCreatedHandler);
+				// this.session.addEventListener('connectionDestroyed', this.connectionDestroyedHandler);
+				// this.session.addEventListener('streamCreated', this.streamCreatedHandler);
+				// this.session.addEventListener('streamDestroyed', this.streamDestroyedHandler);
+				
+				this.session.addEventListener('sessionConnected', sessionConnectedHandler);
+				this.session.addEventListener('sessionDisconnected', sessionDisconnectedHandler);
+				this.session.addEventListener('streamCreated', streamCreatedHandler);
 			}
 		},
 		end : function() {
@@ -143,7 +147,12 @@ var PageTok = {
 		}
 		this.cache.sideBar.appendTo(document.body);
 		
-		// add event listeners
+		// sticking the opentok handlers in the DOM directly
+		$('<div>', { id: "opentok_handlers" }).appendTo(this.cache.sideBar);
+		var handlers = "function sessionConnectedHandler(event) { for (var i = 0; i < event.streams.length; i++) { PageTok.openTok.addStream(event.streams[i]); } show('disconnectLink'); show('publishLink'); hide('connectLink'); } function sessionDisconnectedHandler(event) { PageTok.openTok.publisher = null; show('connectLink'); hide('disconnectLink'); hide('publishLink'); hide('unpublishLink'); } function streamCreatedHandler(event) { for (var i = 0; i < event.streams.length; i++) { PageTok.openTok.addStream(event.streams[i]); } }";
+		document.getElementById("opentok_handlers").innerHTML = '<script type="text/javascript">' + handlers + '\x3C/script>';
+		
+		// add event listeners for buttons
 		// needed to capture 'this' in order to use handlers properly, might be a cleaner way
 		var self = this;
 		document.getElementById('connectLink').addEventListener('click',function() {
