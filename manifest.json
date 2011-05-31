@@ -4,10 +4,16 @@
   "description" : "Create or join a Tokbox video conference based on URL",
   "background_page": "background.html",
   "permissions": [
-    "tabs",
-    "http://*/*"
+    "tabs"
   ],
   "browser_action" : {
     "default_icon" : "icon.png"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "css": ["css/otsession.css"],
+      "js": ["js/lib/jquery.js", "js/lib/TB.min.js", "js/otsession.js"]
+    }
+  ]
 }

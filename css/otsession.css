@@ -11,7 +11,33 @@
 	text-align: left;
 	text-transform: none;
 	top:0%;
+	right:0%;
 	width:320px;
 	-webkit-box-shadow: #CCC 0px 0px 5px;
 	z-index: 10000;
+}
+
+#links {
+	float: top;
+}
+
+#links a, #links input {
+	display: none;
+}
+
+#opentok_console {
+	float: right;
+	width: 400px;
+	font-family: 'courier', monospace;
+	font-size: 12px;
+}
+
+.publisherContainer {
+	float: left;
+}
+
+.subscriberContainer {
+	width: 264px;
+	margin-left: 4px;
+	float:left;
 }
